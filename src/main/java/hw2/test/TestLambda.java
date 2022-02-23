@@ -1,6 +1,7 @@
 package hw2.test;
 
 import hw2.models.Book;
+import hw2.models.Calc;
 import log.Log;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class TestLambda {
     Log log = new Log(TestLambda.class.getName());
 
     public TestLambda concatTwoStrings(){
-        BiFunction<String, String, String > concat = (String s1, String s2) -> s1.concat(" ").concat(s2);
+        BiFunction<String, String, String > concat = (String s1, String s2) -> s1 + " " + s2;
         log.log(String.format("Concat two strings: %s\n", concat.apply("Hello", "There")));
         return this;
     }
@@ -31,15 +32,7 @@ public class TestLambda {
 
     public TestLambda printLengthOfNumber(){
         log.log("Print length of number:");
-        Consumer<Integer> len = (Integer number) -> {
-            int count = 0;
-            int n = number;
-            while (n!=0){
-                n = n/10;
-                count++;
-            }
-            log.log(String.format("Len of %s is %s\n",number,count));
-        };
+        Consumer<Integer> len = (Integer number) -> log.log(String.format("Len of %s is %s\n",number, number.toString().length()));
         len.accept(33);
         len.accept(545);
         len.accept(9999);
@@ -48,10 +41,15 @@ public class TestLambda {
     }
 
     public TestLambda testOperators(){
-        BinaryOperator<Integer> add = Integer::sum;
-        UnaryOperator<Integer> increment = (Integer n) -> n + 1;
-        log.log(String.format("Add operation: %s\n", add.apply(2,2)));
-        log.log(String.format("Increment operation: %s\n", increment.apply(2)));
+        Calc add = Integer::sum;
+        Calc sub = (int a, int b) -> a - b;
+        Calc mult = (int a, int b) -> a * b;
+        Calc div  = (int a, int b) -> (float)a / (float)b;
+
+        log.log(String.format("Add operation: %s\n", add.calc(3,2)));
+        log.log(String.format("Subtract operation: %s\n", sub.calc(3,2)));
+        log.log(String.format("Multiplication operation: %s\n", mult.calc(3,2)));
+        log.log(String.format("Divide operation: %s\n", div.calc(3,2)));
         return this;
     }
 
