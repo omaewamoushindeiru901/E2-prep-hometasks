@@ -1,4 +1,4 @@
-package annotationsHW;
+package hw1;
 
 public class Main {
     @MyCustomAnnotation

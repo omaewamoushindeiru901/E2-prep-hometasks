@@ -1,4 +1,4 @@
-package hw2;
+package hw2.models;
 
 import java.time.LocalDate;
 import java.time.Period;
