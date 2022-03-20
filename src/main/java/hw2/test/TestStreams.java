@@ -1,10 +1,11 @@
 package hw2.test;
 
+import hw2.models.Employee;
+import hw2.models.FilterEmployees;
 import log.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -80,7 +81,21 @@ public class TestStreams {
     }
 
     public TestStreams eighthExercise(){
-        //TODO
+        ArrayList<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1, 10000, "Naruto"));
+        employees.add(new Employee(3, 99999, "Bandera"));
+        employees.add(new Employee(4, 25000, "Andrijko"));
+        employees.add(new Employee(20, 27, "Ostap"));
+        employees.add(new Employee(10, 1000, "Ostap"));
+
+        FilterEmployees filterByid = (Employee employee) -> (employee.getId()<10) && (employee.getName().startsWith("A"));
+        FilterEmployees filterBySalary = (Employee employee) -> (employee.getSalary()<10000);
+
+        log.log(employees.stream().allMatch(filterByid::filterEmployee) + "\n");
+        log.log(employees.stream().anyMatch(filterByid::filterEmployee) + "\n");
+        log.log(employees.stream().allMatch(filterBySalary::filterEmployee) + "\n");
+        log.log(employees.stream().anyMatch(filterBySalary::filterEmployee) + "\n");
+
         return this;
     }
 
