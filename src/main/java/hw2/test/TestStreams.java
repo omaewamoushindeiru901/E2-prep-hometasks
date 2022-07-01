@@ -69,14 +69,15 @@ public class TestStreams {
 
     public TestStreams seventhExercise(){
         ArrayList<Integer> numbers7 = new ArrayList<>(Arrays.asList(1,2,3,4,5));
-        Optional<Integer> findFirst = numbers7.stream()
+        Optional<Integer> findFirst = numbers7.stream().parallel()
                 .filter((n) -> n < 4)
                 .findFirst();
-        Optional<Integer> findAny = numbers7.stream()
+
+        Optional<Integer> findAny = numbers7.stream().parallel()
                 .filter((n) -> n < 4)
                 .findAny();
-        log.log(findFirst.get() + "\n");
-        log.log(findAny.get() + "\n");
+        log.log("Find first: " + findFirst.get() + "\n");
+        log.log("Find any: " + findAny.get() + "\n");
         return this;
     }
 
@@ -132,14 +133,11 @@ public class TestStreams {
         return this;
     }
 
-    //???
     public TestStreams thirteenthExercise(){
-        ArrayList<String > numbers13 = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-        ArrayList<String> filtered = new ArrayList<>(numbers13);
-        log.log(filtered + "\n");
-        filtered.clear();
-        numbers13.parallelStream().forEach(filtered::add);
-        log.log(filtered + "\n");
+        ArrayList<String> numbers13 = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        numbers13.stream().sequential().forEach(e -> System.out.print(e + " "));
+        System.out.println();
+        numbers13.parallelStream().forEach(e -> System.out.print(e + " "));
         return this;
     }
 }
