@@ -1,4 +1,4 @@
-package hw2;
+package hw2.models;
 
 public class Employee {
     private Integer id;
