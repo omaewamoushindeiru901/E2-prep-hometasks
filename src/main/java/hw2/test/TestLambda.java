@@ -2,13 +2,16 @@ package hw2.test;
 
 import hw2.models.Book;
 import hw2.models.Calc;
+import hw2.models.Increment;
 import log.Log;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
 public class TestLambda {
@@ -32,11 +35,12 @@ public class TestLambda {
 
     public TestLambda printLengthOfNumber(){
         log.log("Print length of number:");
-        Consumer<Integer> len = (Integer number) -> log.log(String.format("Len of %s is %s\n",number, number.toString().length()));
-        len.accept(33);
-        len.accept(545);
-        len.accept(9999);
-        len.accept(123456);
+        IntFunction<Integer> len = (int number) -> String.valueOf(number).length();
+        List<Integer> numbers = List.of(33, 545, 9999, 123456);
+        for (Integer elem:numbers) {
+            log.log(String.format("Len of %s is %s\n", elem, len.apply(elem)));
+        }
+
         return this;
     }
 
@@ -45,11 +49,14 @@ public class TestLambda {
         Calc sub = (int a, int b) -> a - b;
         Calc mult = (int a, int b) -> a * b;
         Calc div  = (int a, int b) -> (float)a / (float)b;
+        Increment increment = (int a) -> ++a;
+
 
         log.log(String.format("Add operation: %s\n", add.calc(3,2)));
         log.log(String.format("Subtract operation: %s\n", sub.calc(3,2)));
         log.log(String.format("Multiplication operation: %s\n", mult.calc(3,2)));
         log.log(String.format("Divide operation: %s\n", div.calc(3,2)));
+        log.log(String.format("Increment operation: %s\n", increment.calc(3)));
         return this;
     }
 
