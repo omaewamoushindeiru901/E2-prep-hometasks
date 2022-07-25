@@ -134,10 +134,10 @@ public class TestStreams {
     }
 
     public TestStreams thirteenthExercise(){
-        ArrayList<String> numbers13 = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-        numbers13.stream().sequential().forEach(e -> System.out.print(e + " "));
+        Stream<String> numbers13 = Stream.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+        numbers13.forEach(e -> System.out.print(e + " "));
         System.out.println();
-        numbers13.parallelStream().forEach(e -> System.out.print(e + " "));
+        numbers13.parallel().forEach(e -> System.out.print(e + " "));
         return this;
     }
 }
