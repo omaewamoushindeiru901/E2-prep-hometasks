@@ -10,7 +10,6 @@ public class Main {
 
     public static void main(String[] args){
         Log log = new Log(Main.class.getName());
-
         log.log("\n===START TEST DATETIME API===\n");
         new TestDateTimeAPI()
                 .printZonedDateTimeNow()
